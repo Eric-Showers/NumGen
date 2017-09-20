@@ -1,52 +1,29 @@
+import barcode  #viivakoodi
+from barcode import generate
 
 class Barcode_generator:
-
-    #Given the product number, generate ean13 barcode number
-    def genEan13(self, prodNum):
-        num = '405379' + prodNum
-
-        checkSum = (int(num[0])+int(num[2])+int(num[4])+int(num[6])+int(num[8])+int(num[10]) 
-                + 3*(int(num[1])+int(num[3])+int(num[5])+int(num[7])+int(num[9])+int(num[11])))
-        check2 = checkSum % 10
-        if check2 !=0:
-            check2 = 10 - check2
-        
-        num = num + str(check2)
-        return num
-
-    #Given the product number, generate upca barcode number
-    def genUpca(self, prodNum):
-        num = '885150' + prodNum[0:5]
-
-        checkSum = (3*(int(num[0])+int(num[2])+int(num[4])+int(num[6])+int(num[8])+int(num[10])) 
-                + int(num[1])+int(num[3])+int(num[5])+int(num[7])+int(num[9]))
-        check2 = checkSum % 10
-        if check2 != 0:
-            check2 = 10 - check2
-
-        num = num + str(check2)
-        return num
-
     #Given a type, find an available ProdNum and call generator methods and return code
     def getBarcodeNum(self, codeType):
         #TODO
         #Find an available product number
 
         prodNum = '123456'
-        code = ''
+        if codeType is 'upca':
+            num = '885150' + prodNum[1:]
+        elif codeType is 'ean13':
+            num = '405379' + prodNum
 
-        if codeType is 'ean13':
-            code = self.genEan13(prodNum)
-        elif codeType is 'upca':
-            code = self.genUpca(prodNum)
-        
+        codeObj = barcode.get(codeType, num)
+        code = codeObj.get_fullcode()
         return code
+
     #Given a type, generate the number and image for a barcode
     def getBarcodeImg(self, codeType):
-        #TODO
-        #Call getBarcodeNum with type
-        #Create image of barcode with number
-        return getBarcodeNum(codeType)
+
+        num = self.getBarcodeNum(codeType)
+        generate('%s'%(codeType), u'%s'%(num), output='%s_'%(codeType)+'%s'%(num))
+
+        return self.getBarcodeNum(codeType)
         
 if __name__ == '__main__':
     t = Barcode_generator()
@@ -54,3 +31,5 @@ if __name__ == '__main__':
     print('upca: ' + testNum)
     testNum = t.getBarcodeNum('ean13')
     print('ean13: ' + testNum)
+    t.getBarcodeImg('ean13')
+    t.getBarcodeImg('upca')
