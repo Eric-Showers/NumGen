@@ -3,11 +3,10 @@ import os
 
 class isrc_generator:
 
-    def init(self):
-        self.country = 'DE'
-        self.org = 'MEM'
+    country = 'DE'
+    org = 'MEM'
 
-    def generate(self):
+    def generate(self, amount):
         now = datetime.datetime.now()
         curYear = now.year % 100        #Retrieves two digit year format
 
@@ -19,9 +18,7 @@ class isrc_generator:
         prevYear = int(prevID[5]+prevID[6])
 
         #Extracts last 5 digits of code and increments it's value by 1.
-        #Then casts as String and ensures that it is 5 characters, adding 0's as needed
         newID = int(prevID[7:]) + 1
-        newID = str(newID).zfill(5)
 
         if prevYear < curYear:
             newID = '00001'
@@ -29,11 +26,14 @@ class isrc_generator:
 
         #Builds the code by concatenating country, org, year, and product codes
         code = ''
-        code = code + self.country + self.org + curYear + newID
-        codeLibrary.write('\n' + code)
+        
+        for x in range(0,amount): 
+            code = self.country + self.org + curYear + str(newID).zfill(5)
+            codeLibrary.write('\n' + code)
+            newID = newID + 1
+        
         codeLibrary.close()
 
 if __name__ == '__main__':
     b = isrc_generator()
-    b.init()
-    b.generate()
+    b.generate(5)
