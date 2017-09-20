@@ -3,18 +3,24 @@ class Barcode_generator:
 
     #Given the product number, generate ean13 barcode number
     def genEan13(self, prodNum):
-        #TODO
-        #Concatenate prodNum onto Membran ID, generate check number
-        return prodNum
+        num = '405379' + prodNum
+
+        checkSum = (int(num[0])+int(num[2])+int(num[4])+int(num[6])+int(num[8])+int(num[10]) 
+                + 3*(int(num[1])+int(num[3])+int(num[5])+int(num[7])+int(num[9])+int(num[11])))
+        check2 = checkSum % 10
+        if check2 !=0:
+            check2 = 10 - check2
+        
+        num = num + str(check2)
+        return num
 
     #Given the product number, generate upca barcode number
     def genUpca(self, prodNum):
         num = '885150' + prodNum[0:5]
 
-        check1 = (3*(int(num[0])+int(num[2])+int(num[4])+int(num[6])+int(num[8])+int(num[10])) 
+        checkSum = (3*(int(num[0])+int(num[2])+int(num[4])+int(num[6])+int(num[8])+int(num[10])) 
                 + int(num[1])+int(num[3])+int(num[5])+int(num[7])+int(num[9]))
-        check2 = check1 % 10
-
+        check2 = checkSum % 10
         if check2 != 0:
             check2 = 10 - check2
 
@@ -45,4 +51,6 @@ class Barcode_generator:
 if __name__ == '__main__':
     t = Barcode_generator()
     testNum = t.getBarcodeNum('upca')
-    print(testNum)
+    print('upca: ' + testNum)
+    testNum = t.getBarcodeNum('ean13')
+    print('ean13: ' + testNum)
