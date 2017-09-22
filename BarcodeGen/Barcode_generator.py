@@ -35,8 +35,6 @@ class Barcode_generator:
 
     #Given a type, find an available ProdNum and call generator methods and return code
     def getBarcodeNum(self, codeType, prodNumName):
-        #TODO
-        #Find an available product number
 
         prodNum = self.get_prod_num(prodNumName)
         if codeType is 'upca':
