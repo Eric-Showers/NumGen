@@ -20,7 +20,7 @@
             /* CSS for BC Gen buttons*/
             .buttons {
                 list-style-type: none;
-                margin: 25px 0 0 0;
+                margin: 25px 0 0 10px;
                 padding: 0;
             }
             .buttons li {
@@ -90,20 +90,40 @@
                     <label for="FremdLabel">FremdLabel</label>
                 </li>
             </ul>
-            <div><button>Generate Barcode</button></div>
+            <div><button onclick="genBC()">Generate Barcode</button></div>
         </div>
+
+        <script>
+            function genBC() {
+                allButs = document.getElementsByName("codeType");
+                type = '';
+                for(i=0; i<allButs.length; i++){
+                    if (allButs[i].checked){
+                        return alert(allButs[i].id)
+                    }
+                }
+            }
         
+        </script>
 
         <div id="isrcGen">
 
             <h2>ISRC Generator</h2>
             <p>Enter desired amount of ISRC's:</p>
 
-            <form><input type="text" name="amount"></form>
+            <form id="amount"><input type="text"></form>
 
-            <button>Generate ISRC</button>
+            <button onclick="genISRC()">Generate ISRC</button>
 
         </div>
+
+        <script>
+            function genISRC() {
+                var x = document.getElementById("amount");
+
+                return alert(x.elements[0].value)
+            }
+        </script>
 
     </body>
 </html>
