@@ -2,10 +2,25 @@ import datetime
 import os
 import pymysql.cursors
 
+from flask import Flask
+app = Flask(__name__)
+
+
 class isrc_generator:
 
     country = 'DE'
     org = 'MEM'
+
+    @app.route('/generate')
+    def hello_world():
+        codes = []
+        temp = isrc_generator()
+        codes = temp.generate(5)
+        retLine = ''
+        for lines in codes:
+            retLine = retLine + '\n' + lines
+
+        return retLine
 
     def get_next_num(self, amount):
         connection = pymysql.connect(host='localhost',
@@ -50,12 +65,16 @@ class isrc_generator:
 
         #Builds the code by concatenating country, org, year, and product codes
         code = ''
-
+        codeCollection = []
         for x in range(0, amount):
             code = self.country + self.org + str(codeDic['year']) + str(codeDic['last_gen']).zfill(5)
             codeDic['last_gen'] = codeDic['last_gen'] - 1
-            print(code)
+            codeCollection.append(code)
+
+        return codeCollection
 
 if __name__ == '__main__':
     b = isrc_generator()
-    b.generate(5)
+    codes = b.generate(5)
+    print(codes)
+    b.hello_world()

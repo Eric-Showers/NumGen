@@ -15,50 +15,51 @@ class Barcode_generator:
         try:
             with connection.cursor() as cursor:
                 # Read a single record
-                sql = "SELECT `last_generated` FROM `product_numbers` WHERE `name`=%s"
+                sql = "SELECT `*` FROM `product_numbers` WHERE `name`=%s"
                 cursor.execute(sql, (name,))
                 result = cursor.fetchone()
-                #print(result['last_generated'])
 
                 # Update last_generated
-                newNum = result['last_generated']+1
-                #print(newNum)
-                sql = "UPDATE product_numbers SET last_generated=%d where name=\'%s\'"%(newNum, name)
-                #print(sql)
+                newProd = {}
+                newProd['num'] = result['last_generated']+1
+                newProd['type'] = result['barcode_type']
+                sql = "UPDATE product_numbers SET last_generated=%d where name=\'%s\'"%(newProd['num'], name)
                 cursor.execute(sql)
 
             connection.commit()
         finally:
             connection.close()
 
-        return str(result['last_generated'])
+        return newProd
 
     #Given a type, find an available ProdNum and call generator methods and return code
-    def getBarcodeNum(self, codeType, prodNumName):
+    def getBarcodeNum(self, prodNumName):
 
-        prodNum = self.get_prod_num(prodNumName)
-        if codeType is 'upca':
-            num = '885150' + prodNum[1:]
-        elif codeType is 'ean13':
-            num = '405379' + prodNum
+        newProd = {}
+        newProd = self.get_prod_num(prodNumName)
+        newProd['strNum'] = str(newProd['num'])
+        if newProd['type'] == 'upca':
+            newProd['strNum'] = '885150' + str(newProd['num']%100000)
+        elif newProd['type'] == 'ean13':
+            newProd['strNum'] = '405379' + str(newProd['num'])
 
-        codeObj = barcode.get(codeType, num)
+        codeObj = barcode.get(newProd['type'], str(newProd['strNum']))
         code = codeObj.get_fullcode()
         return code
 
     #Given a type, generate the number and image for a barcode
-    def getBarcodeImg(self, codeType):
+    def getBarcodeImg(self, prodNumName):
 
-        num = self.getBarcodeNum(codeType)
+        num = self.getBarcodeNum(prodNumName)
         generate('%s'%(codeType), u'%s'%(num), output='%s_'%(codeType)+'%s'%(num))
 
         return 0
 
 if __name__ == '__main__':
     t = Barcode_generator()
-    testNum = t.getBarcodeNum('upca','233')
+    testNum = t.getBarcodeNum('233...')
     print('upca: ' + testNum)
-    testNum = t.getBarcodeNum('ean13','600')
+    testNum = t.getBarcodeNum('600...')
     print('ean13: ' + testNum)
     #t.getBarcodeImg('ean13')
     #t.getBarcodeImg('upca')
