@@ -68,29 +68,31 @@
             <h2>Barcode Generator</h2>
             <p>Select Product Type:</p>
 
-            <ul class="buttons">             
-                <li>
-                    <input type="radio" name="codeType" id="244">
-                    <label for="244">244</label>
-                </li>
-                <li>
-                    <input type="radio" name="codeType" id="600">
-                    <label for="600">600</label>
-                </li>
-                <li>
-                    <input type="radio" name="codeType" id="PROMO">
-                    <label for="PROMO">PROMO</label>
-                </li>
-                <li>
-                    <input type="radio" name="codeType" id="Digital">
-                    <label for="Digital">Digital</label>
-                </li>
-                <li>
-                    <input type="radio" name="codeType" id="FremdLabel">
-                    <label for="FremdLabel">FremdLabel</label>
-                </li>
-            </ul>
-            <div><button onclick="genBC()">Generate Barcode</button></div>
+            <form action="/barcode" method="post">
+                <ul class="buttons">             
+                    <li>
+                        <input type="radio" name="codeType" id="233..." value="233...">
+                        <label for="233...">233</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="codeType" id="600..." value="600...">
+                        <label for="600...">600</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="codeType" id="PROMO" value="PROMO">
+                        <label for="PROMO">PROMO</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="codeType" id="Digital" value="Digital">
+                        <label for="Digital">Digital</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="codeType" id="FremdLabel" value="FremdLabel">
+                        <label for="FremdLabel">FremdLabel</label>
+                    </li>
+                </ul>
+                <button name="genBut" type="submit">Generate Barcode</button>
+            </form>
         </div>
 
         <script>
@@ -111,9 +113,10 @@
             <h2>ISRC Generator</h2>
             <p>Enter desired amount of ISRC's:</p>
 
-            <form id="amount"><input type="text"></form>
-
-            <button onclick="genISRC()">Generate ISRC</button>
+            <form action="/ISRC" method="post" id="amount">
+                <input name="amount" id"amount">
+                <button type="submit">Generate ISRC</button>
+            </form>
 
         </div>
 
