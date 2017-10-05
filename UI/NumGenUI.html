@@ -5,16 +5,43 @@
 
         <style>
             body {
-                background-color: #f7f7f7;
+                background-color: lightblue;
+                margin: 0;
+            }
+            #header{
+                position: relative;
+                background-color: black;
+                color: white;
+                width: 100%;
+                text-align: center;
             }
             
             #bcGen {
-                background-color: lightblue;
-                height: 300px;
+                position: relative;
+                background-color: #4298B3;
+                height: 200px;
+                margin: 10;
             }
+            #bcReturn {
+                background-color: white;
+                width: 300px;
+                height: 50px;
+                float: right;
+                margin: 20;
+            }
+
             #isrcGen {
-                background-color: lightblue;
-                height: 300px;
+                position: relative;
+                background-color: #4298B3;
+                height: 200px;
+                margin: 10;
+            }
+            #isrcReturn {
+                background-color: white;
+                width: 300px;
+                height: 50px;
+                float: right;
+                margin: 20;
             }
 
             /* CSS for BC Gen buttons*/
@@ -25,7 +52,7 @@
             }
             .buttons li {
                 float: left;
-                margin: 0 5px 0 0;
+                margin: 20 5px 0 0;
                 background: #8b9dc3;
                 width: 110px;
                 height: 30px;
@@ -62,7 +89,7 @@
 
     <body>
 
-        <h1>Membran Number Generator</h1>
+        <div id="header"><h1>Membran Number Generator</h1></div>
 
         <div id="bcGen">
             <h2>Barcode Generator</h2>
@@ -93,20 +120,11 @@
                 </ul>
                 <button name="genBut" type="submit">Generate Barcode</button>
             </form>
-        </div>
 
-        <script>
-            function genBC() {
-                allButs = document.getElementsByName("codeType");
-                type = '';
-                for(i=0; i<allButs.length; i++){
-                    if (allButs[i].checked){
-                        return alert(allButs[i].id)
-                    }
-                }
-            }
-        
-        </script>
+            <div id="bcReturn">                   
+                <p>Barcode will show here</p>
+            </div>
+        </div>
 
         <div id="isrcGen">
 
@@ -118,15 +136,10 @@
                 <button type="submit">Generate ISRC</button>
             </form>
 
-        </div>
-
-        <script>
-            function genISRC() {
-                var x = document.getElementById("amount");
-
-                return alert(x.elements[0].value)
-            }
-        </script>
+            <div id="isrcReturn">
+                    <p>ISRC will show here</p>
+            </div>
+        </div>        
 
     </body>
 </html>
