@@ -3,87 +3,7 @@
 
         <title>Number Generator</title>
 
-        <style>
-            body {
-                background-color: lightblue;
-                margin: 0;
-            }
-            #header{
-                position: relative;
-                background-color: black;
-                color: white;
-                width: 100%;
-                text-align: center;
-            }
-            
-            #bcGen {
-                position: relative;
-                background-color: #4298B3;
-                height: 200px;
-                margin: 10;
-            }
-            #bcReturn {
-                background-color: white;
-                width: 300px;
-                height: 50px;
-                float: right;
-                margin: 20;
-            }
-
-            #isrcGen {
-                position: relative;
-                background-color: #4298B3;
-                height: 200px;
-                margin: 10;
-            }
-            #isrcReturn {
-                background-color: white;
-                width: 300px;
-                height: 50px;
-                float: right;
-                margin: 20;
-            }
-
-            /* CSS for BC Gen buttons*/
-            .buttons {
-                list-style-type: none;
-                margin: 25px 0 0 10px;
-                padding: 0;
-            }
-            .buttons li {
-                float: left;
-                margin: 20 5px 0 0;
-                background: #8b9dc3;
-                width: 110px;
-                height: 30px;
-                position: relative;
-            }
-            .buttons label, .buttons input {
-                display:block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
-            .buttons input[type="radio"] {
-                opacity: 0.011;
-                z-index: 100;
-            }
-            .buttons input[type="radio"]:checked + label {
-                background:	#f7f7f7;
-            }
-            .buttons label {
-                padding: 5px;
-                border: 1px soled #CCC;
-                cursor:pointer;
-                z-index: 90;
-            }
-            .buttons label:hover {
-                background: #3b5998;
-            }
-        
-        </style>
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
 
     </head>
 
@@ -99,11 +19,11 @@
                 <ul class="buttons">             
                     <li>
                         <input type="radio" name="codeType" id="233..." value="233...">
-                        <label for="233...">233</label>
+                        <label for="233...">Membran Product (233)</label>
                     </li>
                     <li>
                         <input type="radio" name="codeType" id="600..." value="600...">
-                        <label for="600...">600</label>
+                        <label for="600...">Intense Product (600)</label>
                     </li>
                     <li>
                         <input type="radio" name="codeType" id="PROMO" value="PROMO">
@@ -115,7 +35,7 @@
                     </li>
                     <li>
                         <input type="radio" name="codeType" id="FremdLabel" value="FremdLabel">
-                        <label for="FremdLabel">FremdLabel</label>
+                        <label for="FremdLabel">Label Products</label>
                     </li>
                 </ul>
                 <button name="genBut" type="submit">Generate Barcode</button>
