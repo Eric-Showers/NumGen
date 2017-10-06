@@ -14,8 +14,8 @@ def static_page():
 def createBarcode():
     productType = request.form['codeType']
     BCgen = Barcode_generator()
-    code = BCgen.getBarcodeNum(str(productType))
-    return "Barcode: "+code
+    codeDict = BCgen.getBarcodeNum(str(productType))
+    return "Barcode: "+codeDict['code']+"<br>"+"Catalogue number: "+codeDict['strNum']
 
 @app.route('/ISRC', methods=['POST'])
 def createISRC():

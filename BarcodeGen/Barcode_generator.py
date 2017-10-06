@@ -39,18 +39,18 @@ class Barcode_generator:
         newProd = self.get_prod_num(prodNumName)
         newProd['strNum'] = str(newProd['num'])
         if newProd['type'] == 'upca':
-            newProd['strNum'] = '885150' + str(newProd['num']%100000)
+            newProd['code'] = '885150' + str(newProd['num']%100000)
         elif newProd['type'] == 'ean13':
-            newProd['strNum'] = '405379' + str(newProd['num'])
+            newProd['code'] = '405379' + str(newProd['num'])
 
-        codeObj = barcode.get(newProd['type'], str(newProd['strNum']))
-        code = codeObj.get_fullcode()
-        return code
+        codeObj = barcode.get(newProd['type'], str(newProd['code']))
+        newProd['code'] = codeObj.get_fullcode()
+        return newProd
 
     #Given a type, generate the number and image for a barcode
     def getBarcodeImg(self, prodNumName):
 
-        num = self.getBarcodeNum(prodNumName)
+        newProd = self.getBarcodeNum(prodNumName)
         generate('%s'%(codeType), u'%s'%(num), output='%s_'%(codeType)+'%s'%(num))
 
         return 0
@@ -58,8 +58,10 @@ class Barcode_generator:
 if __name__ == '__main__':
     t = Barcode_generator()
     testNum = t.getBarcodeNum('233...')
-    print('upca: ' + testNum)
+    print('upca: ' + testNum['code'])
+    print('Catalogue number: ' + testNum['strNum'])
     testNum = t.getBarcodeNum('600...')
-    print('ean13: ' + testNum)
+    print('ean13: ' + testNum['code'])
+    print('Catalogue number: ' + testNum['strNum'])
     #t.getBarcodeImg('ean13')
     #t.getBarcodeImg('upca')
