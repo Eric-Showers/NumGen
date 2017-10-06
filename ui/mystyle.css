@@ -1,78 +1,148 @@
 body {
-                background-color: lightblue;
-                margin: 0;
-            }
-            #header{
-                position: relative;
-                background-color: black;
-                color: white;
-                width: 100%;
-                text-align: center;
-            }
-            
-            #bcGen {
-                position: relative;
-                background-color: #4298B3;
-                height: 200px;
-                margin: 10;
-            }
-            #bcReturn {
-                background-color: white;
-                width: 300px;
-                height: 50px;
-                float: right;
-                margin: 20;
-            }
+    background-color: lightblue;
+    margin: 0;
+}
+#header {
+    position: relative;
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 50;
+    text-align: center;
+}
 
-            #isrcGen {
-                position: relative;
-                background-color: #4298B3;
-                height: 200px;
-                margin: 10;
-            }
-            #isrcReturn {
-                background-color: white;
-                width: 300px;
-                height: 50px;
-                float: right;
-                margin: 20;
-            }
+#bcGen {
+    position: relative;
+    background-color: #4298B3;
+    display: inline-content;
+    margin-left: 15;
+    margin-right: 15;
+}
+#bcReturn {
+    background-color: white;
+    width: 300px;
+    height: 50px;
+    float: right;
+    margin-left: 20;
+}
 
-            /* CSS for BC Gen buttons*/
-            .buttons {
-                list-style-type: none;
-                margin: 25px 0 0 10px;
-                padding: 0;
-            }
-            .buttons li {
-                float: left;
-                margin: 20 5px 0 0;
-                background: #8b9dc3;
-                width: 110px;
-                height: 30px;
-                position: relative;
-            }
-            .buttons label, .buttons input {
-                display:block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
-            .buttons input[type="radio"] {
-                opacity: 0.011;
-                z-index: 100;
-            }
-            .buttons input[type="radio"]:checked + label {
-                background:	#f7f7f7;
-            }
-            .buttons label {
-                padding: 5px;
-                border: 1px soled #CCC;
-                cursor:pointer;
-                z-index: 90;
-            }
-            .buttons label:hover {
-                background: #3b5998;
-            }
+#isrcGen {
+    position: relative;
+    background-color: #4298B3;
+    display: inline-content;
+    margin-left: 15;
+    margin-right: 15;
+}
+#isrcReturn {
+    background-color: white;
+    width: 300px;
+    height: 50px;
+    float: right;
+    margin: 20;
+}
+
+.isrcHead {
+    margin-left: 10;
+}
+.isrcForm {
+    margin-left: 15;
+    margin-bottom: 10;
+    position: relative;
+}
+
+/* CSS for BC Gen buttons*/
+.buttonHead {
+    margin-left: 10;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 15;
+}
+.buttons div {
+    margin-bottom: 10;
+    background: #8b9dc3;
+    width: 170px;
+    height: 30px;
+    position: relative;
+}
+.buttons label, .buttons input {
+    position: absolute;
+}
+.buttons input[type="radio"] {
+    opacity: 0.011;
+    z-index: 100;
+}
+.buttons input[type="radio"]:checked + label {
+    background:	#f7f7f7;
+}
+.buttons label {
+    width: 170px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+}
+.buttons label:hover {
+    background: #3b5998;
+}
+
+/* Font controls */
+h1 {
+	font-family: "Helvetica Neue";
+	font-size: 30px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 40px;
+}
+h2 {
+    font-family: "Helvetica Neue";
+    font-size: 25px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26px;
+}
+h3 {
+	font-family: "Helvetica Neue";
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 21px;
+}
+p {
+	font-family: "Helvetica Neue";
+	font-size: 18px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+label {
+	font-family: "Helvetica Neue";
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+blockquote {
+	font-family: "Helvetica Neue";
+	font-size: 21px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 30px;
+}
+pre {
+	font-family: "Helvetica Neue";
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 18.5714px;
+}
