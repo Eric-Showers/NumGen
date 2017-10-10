@@ -1,0 +1,90 @@
+<html>
+    <head>
+
+        <title>Number Generator</title>
+
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+    </head>
+
+    <body>
+
+        <div id="header">
+            <img src="MEG_logo_white.svg" height="50" width="50" style="float: left">
+            <h1>Membran Number Generator</h1>
+        </div>
+
+        <div id="bcGen">
+
+            <div class="buttonHead">
+                <h2>Barcode Generator</h2>
+                <p>Select Product Type:</p>
+            </div>
+            
+            <div class="buttons">
+                <form action="/" method="post">
+                    <div>
+                        <input type="radio" name="codeType" id="233..." value="233...">
+                        <label for="233...">Membran Product (233)</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="codeType" id="600..." value="600...">
+                        <label for="600...">Intense Product (600)</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="codeType" id="PROMO" value="PROMO">
+                        <label for="PROMO">PROMO</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="codeType" id="Digital" value="Digital">
+                        <label for="Digital">Digital</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="codeType" id="FremdLabel" value="FremdLabel">
+                        <label for="FremdLabel">Label Products</label>
+                    </div>
+
+                    <button type="submit">Generate ISRC</button>
+
+                </form>
+            </div>
+
+            <div class="buttonDesc">
+
+                <p>Here are the descriptions</p>
+
+            </div>
+
+            <div class="returnField">
+
+                {{returnBarcode}}
+
+            </div>
+
+        </div>
+
+
+        <div id="isrcGen">
+
+            <div class="isrcHead">
+                <h2>ISRC Generator</h2>
+                <p>Enter desired amount of ISRC's:</p>
+            </div>
+
+            <div class="isrcForm">
+                <form action="/" method="post" id="amounts">
+                    
+                    <div class="isrcForm">
+                        <input name="amount" id"amounts">
+                        <button type="submit">Generate ISRC</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="isrcReturn">
+                    {{returnISRC}}
+            </div>
+        </div>       
+    </body>
+</html>

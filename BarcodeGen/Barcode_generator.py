@@ -42,6 +42,8 @@ class Barcode_generator:
             newProd['code'] = '885150' + str(newProd['num']%100000)
         elif newProd['type'] == 'ean13':
             newProd['code'] = '405379' + str(newProd['num'])
+        else:
+            newProd['code'] = str(newProd['num'])
 
         codeObj = barcode.get(newProd['type'], str(newProd['code']))
         newProd['code'] = codeObj.get_fullcode()
@@ -51,7 +53,7 @@ class Barcode_generator:
     def getBarcodeImg(self, prodNumName):
 
         newProd = self.getBarcodeNum(prodNumName)
-        generate('%s'%(codeType), u'%s'%(num), output='%s_'%(codeType)+'%s'%(num))
+        generate('%s'%(newProd['type']), u'%s'%(newProd['code']), output='%s_'%(newProd['type'])+'%s'%(newProd['code']))
 
         return 0
 
