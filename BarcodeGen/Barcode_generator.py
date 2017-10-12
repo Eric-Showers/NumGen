@@ -16,7 +16,7 @@ class Barcode_generator:
         try:
             with connection.cursor() as cursor:
                 # Read a single record
-                sql = "SELECT `*` FROM `product_numbers` WHERE `name`=%s"
+                sql = "SELECT * FROM product_numbers WHERE name=%s"
                 cursor.execute(sql, (name,))
                 result = cursor.fetchone()
 
@@ -24,8 +24,8 @@ class Barcode_generator:
                 newProd = {}
                 newProd['num'] = result['last_generated']+1
                 newProd['type'] = result['barcode_type']
-                sql = "UPDATE product_numbers SET last_generated=%d where name=\'%s\'"%(newProd['num'], name)
-                cursor.execute(sql)
+                sql = "UPDATE product_numbers SET last_generated=%s where name=%s"
+                cursor.execute(sql,(newProd['num'], name))
 
             connection.commit()
         finally:
