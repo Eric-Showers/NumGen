@@ -1,0 +1,6 @@
+Flask==0.12.2
+Jinja2==2.8
+viivakoodi==0.8.0
+PyMySQL==0.7.11
+gunicorn
+gevent

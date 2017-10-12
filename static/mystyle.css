@@ -1,32 +1,59 @@
 body {
-    background-color: lightblue;
+    background-color: black;
     margin: 0;
 }
 #header {
     position: relative;
-    background-color: black;
-    color: white;
+    background-color: #CECDCD;
+    color: black;
     width: 100%;
     height: 50;
     text-align: center;
 }
 
 #bcGen {
+    border: 1px solid white;
+    border-radius: 10px;
     position: relative;
-    background-color: #4298B3;
-    height: 320;
+    background-color: white;
+    height: 350;
     width: 95%;
+    margin-top: 10;
     margin-left: 15;
     margin-right: 15;
 }
 
 #isrcGen {
+    border: 1px solid white;
+    border-radius: 10px;
     position: relative;
-    background-color: #4298B3;
-    height: 200;
+    background-color: white;
+    height: 350;
     width: 95%;
+    margin-top: 10;
     margin-left: 15;
     margin-right: 15;
+}
+
+.buttonDesc {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    width: 200;
+    height: 200;
+    margin-left: 10%;
+    float: left;
+}
+.returnField {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    width: 200;
+    height: 200;
+    margin-left: 10%;
+    float: left;
 }
 
 .isrcHead {
@@ -38,26 +65,55 @@ body {
     float: left;
 }
 .isrcReturn {
+    border: 2px solid black;
+    border-radius: 10px;
     background-color: white;
-    width: 300px;
-    height: 50px;
+    color: black;
+    width: 200;
+    height: 200;
     float: left;
-    margin-left: 30;
+    margin-left: 10%;
 }
 
-.buttonDesc {
-    background-color: white;
-    width: 200;
-    height: 200;
-    margin-left: 10%;
-    float: left;
+/* CSS class for generation buttons */
+.genButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+	box-shadow:inset 0px 1px 0px 0px #cf866c;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+	background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+	background-color:#d0451b;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #942911;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #854629;
 }
-.returnField {
-    background-color: white;
-    width: 200;
-    height: 200;
-    margin-left: 10%;
-    float: left;
+.genButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
+	background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bc3315', endColorstr='#d0451b',GradientType=0);
+	background-color:#bc3315;
+}
+.genButton:active {
+	position:relative;
+	top:1px;
 }
 
 /* CSS for BC Gen buttons*/
@@ -70,20 +126,23 @@ body {
 }
 .buttons div {
     margin-bottom: 10;
-    background: #8b9dc3;
+    background: white;
     width: 170px;
     height: 30px;
     position: relative;
 }
 .buttons label, .buttons input {
     position: absolute;
+    color: black;
+    font-weight: bold;
 }
 .buttons input[type="radio"] {
     opacity: 0.011;
     z-index: 100;
 }
 .buttons input[type="radio"]:checked + label {
-    background:	#f7f7f7;
+    background:	black;
+    color: white;
 }
 .buttons label {
     width: 170px;
@@ -94,7 +153,7 @@ body {
     align-items: center;
 }
 .buttons label:hover {
-    background: #3b5998;
+    background: rgb(187, 187, 187);
 }
 
 /* Font controls */

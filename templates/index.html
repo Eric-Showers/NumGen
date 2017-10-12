@@ -10,7 +10,7 @@
     <body>
 
         <div id="header">
-            <img src="MEG_logo_white.svg" height="50" width="50" style="float: left">
+            <img src="{{url_for('static', filename='MEG_Logo_black.svg')}}" height="50" width="50" style="float: left">
             <h1>Membran Number Generator</h1>
         </div>
 
@@ -22,7 +22,7 @@
             </div>
             
             <div class="buttons">
-                <form action="/" method="post">
+                <form>
                     <div>
                         <input type="radio" name="codeType" id="233..." value="233...">
                         <label for="233...">Membran Product (233)</label>
@@ -43,10 +43,8 @@
                         <input type="radio" name="codeType" id="FremdLabel" value="FremdLabel">
                         <label for="FremdLabel">Label Products</label>
                     </div>
-
-                    <button type="submit">Generate ISRC</button>
-
                 </form>
+                <a class="genButton" onclick="getBarcode()">Generate Barcode</a>
             </div>
 
             <div class="buttonDesc">
@@ -57,12 +55,25 @@
 
             <div class="returnField">
 
-                {{returnBarcode}}
+                <p id="returnBarcode">Generated barcode will appear here</p>
 
             </div>
 
         </div>
 
+        <script>
+            function getBarcode() {
+                var codeType = document.querySelector('input[name="codeType"]:checked').value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    document.getElementById("returnBarcode").innerHTML = this.responseText;
+                };
+                
+                xhttp.open("POST", "/barcode", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("codeType="+codeType);                
+            }
+        </script>
 
         <div id="isrcGen">
 
@@ -72,19 +83,32 @@
             </div>
 
             <div class="isrcForm">
-                <form action="/" method="post" id="amounts">
-                    
-                    <div class="isrcForm">
-                        <input name="amount" id"amounts">
-                        <button type="submit">Generate ISRC</button>
+                <form>                    
+                    <div>
+                        <input id="amount">
                     </div>
-
                 </form>
+                <a class="genButton" onclick="getISRC()">Generate ISRC</a>
             </div>
+
+            <script>
+                function getISRC() {
+                    var amount = document.getElementById('amount').value;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        document.getElementById("returnISRC").innerHTML = this.responseText;
+                    };
+                    
+                    xhttp.open("POST", "/ISRC", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send("amount="+amount);                
+                }
+            </script>
 
             <div class="isrcReturn">
-                    {{returnISRC}}
+                <p id="returnISRC">Generated ISRC will appear here</p>
             </div>
+
         </div>       
     </body>
 </html>

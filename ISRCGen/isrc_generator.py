@@ -11,17 +11,6 @@ class isrc_generator:
     country = 'DE'
     org = 'MEM'
 
-    @app.route('/generate')
-    def hello_world():
-        codes = []
-        temp = isrc_generator()
-        codes = temp.generate(5)
-        retLine = ''
-        for lines in codes:
-            retLine = retLine + '\n' + lines
-
-        return retLine
-
     def get_next_num(self, amount):
         connection = pymysql.connect(host='localhost',
                                      user='root',
@@ -66,9 +55,10 @@ class isrc_generator:
         #Builds the code by concatenating country, org, year, and product codes
         code = ''
         codeCollection = []
+        codeDic['las_gen'] = codeDic['last_gen'] - amount + 1
         for x in range(0, amount):
             code = self.country + self.org + str(codeDic['year']) + str(codeDic['last_gen']).zfill(5)
-            codeDic['last_gen'] = codeDic['last_gen'] - 1
+            codeDic['last_gen'] = codeDic['last_gen'] + 1
             codeCollection.append(code)
 
         return codeCollection
@@ -77,4 +67,3 @@ if __name__ == '__main__':
     b = isrc_generator()
     codes = b.generate(5)
     print(codes)
-    b.hello_world()

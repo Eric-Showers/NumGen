@@ -5,7 +5,8 @@ import pymysql.cursors
 class Barcode_generator:
 
     def get_prod_num(self, name):
-        connection = pymysql.connect(host='localhost',
+
+        connection = pymysql.connect(host='localhsot',
                                      user='root',
                                      password='12345',
                                      db='learningDB',
