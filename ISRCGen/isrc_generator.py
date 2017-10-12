@@ -22,8 +22,8 @@ class isrc_generator:
         try:
             with connection.cursor() as cursor:
                 # Reads the last assinged code
-                sql = "SELECT `last_gen`, `year` FROM isrc WHERE country=\'%s\' AND org=\'%s\'"%(self.country, self.org)
-                cursor.execute(sql)
+                sql = "SELECT last_gen, year FROM isrc WHERE country=%s AND org=%s"
+                cursor.execute(sql,(self.country, self.org))
                 result = cursor.fetchone()
 
                 now = datetime.datetime.now()
@@ -38,8 +38,8 @@ class isrc_generator:
                     result['last_gen'] = result['last_gen']+amount
 
                 # Stores values that have now been used
-                sql = "UPDATE isrc SET last_gen=%d where country=\'%s\' AND org=\'%s\'"%(result['last_gen'], self.country, self.org)
-                cursor.execute(sql)
+                sql = "UPDATE isrc SET last_gen=%s where country=%s AND org=%s"
+                cursor.execute(sql,(result['last_gen'], self.country, self.org))
 
             connection.commit()
         finally:
