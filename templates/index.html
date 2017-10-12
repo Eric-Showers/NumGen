@@ -69,7 +69,7 @@
                     document.getElementById("returnBarcode").innerHTML = this.responseText;
                 };
                 
-                xhttp.open("POST", "/barcode", true);
+                xhttp.open("POST", "{{url_for('createBarcode')}}", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send("codeType="+codeType);                
             }
@@ -99,7 +99,7 @@
                         document.getElementById("returnISRC").innerHTML = this.responseText;
                     };
                     
-                    xhttp.open("POST", "/ISRC", true);
+                    xhttp.open("POST", "{{url_for('createISRC')}}", true);
                     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhttp.send("amount="+amount);                
                 }
