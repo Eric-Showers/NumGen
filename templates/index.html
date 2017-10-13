@@ -10,7 +10,7 @@
     <body>
 
         <div id="header">
-            <img src="{{url_for('static', filename='MEG_Logo_black.svg')}}" height="50" width="50" style="float: left">
+            <img src="{{url_for('static', filename='MEG_Logo_white.png')}}" height="60" width="70" style="float: left">
             <h1>Membran Number Generator</h1>
         </div>
 
@@ -65,10 +65,15 @@
                     </div>
             </div>
 
-            <div class="returnField">
+            <div class="BCreturnField">
+                <p>New Barcode:</p>
+                <div id="returnBarcode">
 
-                <p id="returnBarcode">Generated barcode will appear here</p>
+                </div>
+                <p>New Catalogue Number:</p>
+                <div id="returnProdNum">
 
+                </div>
             </div>
 
         </div>

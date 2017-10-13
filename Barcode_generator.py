@@ -27,11 +27,11 @@ class Barcode_generator:
 
                 # Update last_generated
                 newProd = {}
-                newProd['num'] = result['last_generated']+1
+                newProd['prodNum'] = result['last_generated']+1
                 newProd['type'] = result['barcode_type']
                 newProd['firstDig'] = result['first_digits']
                 sql = "UPDATE product_numbers SET last_generated=%s where name=%s"
-                cursor.execute(sql,(newProd['num'], name))
+                cursor.execute(sql,(newProd['prodNum'], name))
 
             connection.commit()
         finally:
@@ -44,13 +44,13 @@ class Barcode_generator:
 
         newProd = {}
         newProd = self.get_prod_num(prodNumName)
-        newProd['strNum'] = str(newProd['num'])
+        newProd['strProdNum'] = str(newProd['prodNum'])
         if newProd['type'] == 'upca':
-            newProd['code'] = str(newProd['firstDig']) + str(newProd['num']%100000)
+            newProd['code'] = str(newProd['firstDig']) + str(newProd['prodNum']%100000)
         elif newProd['type'] == 'ean13':
-            newProd['code'] = str(newProd['firstDig']) + str(newProd['num'])
+            newProd['code'] = str(newProd['firstDig']) + str(newProd['prodNum'])
         else:
-            newProd['code'] = str(newProd['num'])
+            newProd['code'] = str(newProd['prodNum'])
 
         codeObj = barcode.get(newProd['type'], str(newProd['code']))
         newProd['code'] = codeObj.get_fullcode()
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     t = Barcode_generator()
     testNum = t.getBarcodeNum('233...')
     print('upca: ' + testNum['code'])
-    print('Catalogue number: ' + testNum['strNum'])
+    print('Catalogue number: ' + testNum['strProdNum'])
     testNum = t.getBarcodeNum('600...')
     print('ean13: ' + testNum['code'])
-    print('Catalogue number: ' + testNum['strNum'])
+    print('Catalogue number: ' + testNum['strProdNum'])
