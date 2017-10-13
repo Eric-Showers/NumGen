@@ -1,6 +1,7 @@
 import datetime
 import os
 import pymysql.cursors
+import json
 
 from flask import Flask
 app = Flask(__name__)
@@ -8,21 +9,24 @@ app = Flask(__name__)
 
 class isrc_generator:
 
-    country = 'DE'
-    org = 'MEM'
+    with open('Init/config.json') as data_file:
+        config_data = json.load(data_file)
+
+    country = config_data['isrc']['country_code']
+    org = config_data['isrc']['registrant_code']
 
     def get_next_num(self, amount):
-        connection = pymysql.connect(host='localhost',
-                                     user='root',
-                                     password='12345',
-                                     db='learningDB',
+        connection = pymysql.connect(host=self.config_data['Mysql']['host'],
+                                     user=self.config_data['Mysql']['user'],
+                                     password=self.config_data['Mysql']['password'],
+                                     db=self.config_data['Mysql']['db'],
                                      charset='utf8',
                                      cursorclass=pymysql.cursors.DictCursor)
 
         try:
             with connection.cursor() as cursor:
                 # Reads the last assinged code
-                sql = "SELECT last_generated, year FROM isrc WHERE country=%s AND org=%s"
+                sql = "SELECT last_generated, last_gen_year FROM isrc_numbers WHERE country_code=%s AND registrant_code=%s"
                 cursor.execute(sql,(self.country, self.org))
                 result = cursor.fetchone()
 
@@ -38,7 +42,7 @@ class isrc_generator:
                     result['last_generated'] = result['last_generated']+amount
 
                 # Stores values that have now been used
-                sql = "UPDATE isrc SET last_generated=%s where country=%s AND org=%s"
+                sql = "UPDATE isrc_numbers SET last_generated=%s where country_code=%s AND registrant_code=%s"
                 cursor.execute(sql,(result['last_generated'], self.country, self.org))
 
             connection.commit()
@@ -57,7 +61,7 @@ class isrc_generator:
         codeCollection = []
         codeDic['last_generated'] = codeDic['last_generated'] - amount + 1
         for x in range(0, amount):
-            code = codeDic['country_code'] + codeDic['registrant_code'] + str(codeDic['last_gen_year']) + str(codeDic['last_generated']).zfill(5)
+            code = self.country + self.org + str(codeDic['last_gen_year']) + str(codeDic['last_generated']).zfill(5)
             codeDic['last_generated'] = codeDic['last_generated'] + 1
             codeCollection.append(code)
 
