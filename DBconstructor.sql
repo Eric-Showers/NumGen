@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `product_numbers` (
   `last_generated` bigint(20) DEFAULT NULL,
   `is_default` tinyint(1) DEFAULT NULL,
   `barcode_type` varchar(30) DEFAULT NULL,
-  `first_digits` int DEFAULT NULL,
+  `first_digits` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS `isrc_numbers` (
   `name` varchar(100) NOT NULL DEFAULT '',
   `country_code` varchar(2) NOT NULL DEFAULT 'DE',
   `registrant_code` varchar(3) NOT NULL DEFAULT '',
-  `last_generated` int DEFAULT NULL,
-  `last_gen_year` int DEFAULT NULL,
+  `last_generated` int(11) DEFAULT NULL,
+  `last_gen_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
