@@ -25,8 +25,8 @@ INSERT INTO `product_numbers` (`id`, `name`, `last_generated`, `is_default`, `ba
 (2, '600...', 600449, NULL, 'ean13', 405379),
 (3, 'Digital', 285232, NULL, 'upca', 885150),
 (4, 'PROMO', 17, NULL, 'code39', NULL),
-(5, 'Fremdlabel', 270009, NULL, 'upca', 885150);
-*/
+(5, 'Fremdlabel', 270009, NULL, 'upca', 885150)*/;
+
 
 --
 -- Table structure for table `isrc_numbers`
@@ -48,5 +48,4 @@ CREATE TABLE IF NOT EXISTS `isrc_numbers` (
 
 /*
 INSERT INTO `isrc_numbers` (`id`, `name`, `registrant_code`, `country_code`, `last_generated`, `last_gen_year`) VALUES
-(1, 'Membran', 'U24', 'DE', 0, 17);
-*/
+(1, 'Membran', 'U24', 'DE', 0, 17)*/;
