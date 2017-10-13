@@ -48,4 +48,8 @@ CREATE TABLE IF NOT EXISTS `isrc_numbers` (
 
 
 INSERT INTO `isrc_numbers` (`id`, `name`, `registrant_code`, `country_code`, `last_generated`, `last_gen_year`) VALUES
+<<<<<<< HEAD:Init/DBconstructor.sql
 (1, 'Membran', 'U24', 'DE', 0, 17);
+=======
+(1, 'Membran', 'U24', 'DE', 0, 17);
+>>>>>>> 106b73454f0ac1630cbb985ecd00ac0216f0c2f0:DBconstructor.sql
