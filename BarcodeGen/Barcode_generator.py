@@ -24,6 +24,7 @@ class Barcode_generator:
                 newProd = {}
                 newProd['num'] = result['last_generated']+1
                 newProd['type'] = result['barcode_type']
+                newProd['firstDig'] = result['first_digits']
                 sql = "UPDATE product_numbers SET last_generated=%s where name=%s"
                 cursor.execute(sql,(newProd['num'], name))
 
@@ -40,9 +41,9 @@ class Barcode_generator:
         newProd = self.get_prod_num(prodNumName)
         newProd['strNum'] = str(newProd['num'])
         if newProd['type'] == 'upca':
-            newProd['code'] = '885150' + str(newProd['num']%100000)
+            newProd['code'] = str(newProd['firstDig']) + str(newProd['num']%100000)
         elif newProd['type'] == 'ean13':
-            newProd['code'] = '405379' + str(newProd['num'])
+            newProd['code'] = str(newProd['firstDig']) + str(newProd['num'])
         else:
             newProd['code'] = str(newProd['num'])
 
@@ -66,5 +67,3 @@ if __name__ == '__main__':
     testNum = t.getBarcodeNum('600...')
     print('ean13: ' + testNum['code'])
     print('Catalogue number: ' + testNum['strNum'])
-    #t.getBarcodeImg('ean13')
-    #t.getBarcodeImg('upca')
