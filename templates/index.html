@@ -85,8 +85,13 @@
                 var codeDict = {};
                 xhttp.onreadystatechange = function() {
                     var codeDict = JSON.parse(this.responseText);
-                    document.getElementById("returnBarcode").innerHTML = codeDict['code'];
-                    document.getElementById("returnProdNun").innerHTML = codeDict['strProdNum'];
+                    console.log(this.responseText);
+                    console.log(codeDict);
+                    for (x in codeDict){
+                        console.log(codeDict[x]);
+                    }
+                    document.getElementById("returnBarcode").innerHTML = codeDict.code;
+                    document.getElementById("returnProdNum").innerHTML = codeDict.strProdNum;
                 };
                 
                 xhttp.open("POST", "{{url_for('createBarcode')}}", true);
@@ -115,8 +120,15 @@
                 function getISRC() {
                     var amount = document.getElementById('amount').value;
                     var xhttp = new XMLHttpRequest();
+                    var isrcString = "";
+                    var isrcList = [];
                     xhttp.onreadystatechange = function() {
-                        document.getElementById("returnISRC").innerHTML = this.responseText;
+                        var isrcList = JSON.parse(this.responseText);
+
+                        for (x in isrcList) {
+                            isrcString += isrcList[x] + "<br>";
+                        }
+                        document.getElementById("returnISRC").innerHTML = isrcString;
                     };
                     
                     xhttp.open("POST", "{{url_for('createISRC')}}", true);

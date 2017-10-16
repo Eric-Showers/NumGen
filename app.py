@@ -20,26 +20,15 @@ def createBarcode():
     codeDict = BCgen.getBarcodeNum(request.form['codeType'])
 
     json_data = json.dumps(codeDict)
-
-    #return codeDict['code']+"<br>"+codeDict['strProdNum']
-    print(json_data)
     return json_data
 
 @app.route('/ISRC', methods=['POST'])
 def createISRC():
     ISRCgen = isrc_generator()
     codeList = ISRCgen.generate(int(request.form['amount']))
-    
-    
-    codeString = ''
-    for code in codeList:
-        codeString = codeString + code + '<br>'
 
-
-    #json_data = json.dumps(codeList)
-    #return json_data
-
-    return codeString
+    json_data = json.dumps(codeList)
+    return json_data
 
 def mainMethod():
     BCgenerator = Barcode_generator()
