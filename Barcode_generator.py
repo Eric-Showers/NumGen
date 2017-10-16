@@ -54,6 +54,7 @@ class Barcode_generator:
 
         codeObj = barcode.get(newProd['type'], str(newProd['code']))
         newProd['code'] = codeObj.get_fullcode()
+        print(newProd)
         return newProd
 
     #Given a type, generate the number and image for a barcode

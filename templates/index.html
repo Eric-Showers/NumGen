@@ -68,11 +68,11 @@
             <div class="BCreturnField">
                 <p>New Barcode:</p>
                 <div id="returnBarcode">
-
+                    <!-- Barcode num goes here -->
                 </div>
                 <p>New Catalogue Number:</p>
                 <div id="returnProdNum">
-
+                    <!-- Catalogue num goes here -->
                 </div>
             </div>
 
@@ -82,8 +82,11 @@
             function getBarcode() {
                 var codeType = document.querySelector('input[name="codeType"]:checked').value;
                 var xhttp = new XMLHttpRequest();
+                var codeDict = {};
                 xhttp.onreadystatechange = function() {
-                    document.getElementById("returnBarcode").innerHTML = this.responseText;
+                    var codeDict = JSON.parse(this.responseText);
+                    document.getElementById("returnBarcode").innerHTML = codeDict['code'];
+                    document.getElementById("returnProdNun").innerHTML = codeDict['strProdNum'];
                 };
                 
                 xhttp.open("POST", "{{url_for('createBarcode')}}", true);
