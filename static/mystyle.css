@@ -10,10 +10,9 @@ body {
     height: 50;
 }
 #header div {
-    margin-left: 50px;
+    margin-left: 130px;
     float: left;
 }
-
 #bcGen {
     border: 1px solid white;
     border-radius: 15px;
@@ -24,67 +23,66 @@ body {
     margin-top: 10;
     margin-left: 15;
     margin-right: 15;
+    overflow: auto;
 }
-
 #isrcGen {
     border: 1px solid white;
     border-radius: 15px;
     position: relative;
     background-color: white;
-    height: 350;
+    height: 420;
     width: 95%;
     margin-top: 30px;
     margin-left: 15;
     margin-right: 15;
 }
 
-.buttonDesc {
-    color: black;
-    width: 30%;
-    margin-left: 10px;
-    float: left;
-}
-.buttonDesc div {
-    height: 34px;
-    margin-bottom: 2px;
-    padding: 3 3;
-}
 .BCreturnField {
     border: 2px solid black;
     border-radius: 10px;
-    background-color: white;
-    color: black;
-    width: 400;
-    height: 230;
-    margin-left: 10px;
+    width: 300;
+    height: 250;
+    margin-right: 10px;
+    margin-left: 15px;
     float: left;
     padding: 0px 10px;
 }
 .BCreturnField div {
     border: 2px solid black;
     border-radius: 10px;
-    width: 340;
+    width: 240;
     height: 50;
     margin-left: 30px;
+    line-height: 30px;
+    padding: 0px 5px;
 }
 
 .isrcHead {
-    margin-left: 10;
+    margin-left: 10px;
 }
 .isrcForm {
-    margin-left: 15;
+    margin-left: 15px;
+    margin-right: 140px;
     position: relative;
     float: left;
 }
-.isrcReturn {
+.isrcResults {
+    position: relative;
+    float: left;
+}
+.isrcForm div {
+    margin-bottom: 20px;
+}
+.isrcReturnBox {
     border: 2px solid black;
     border-radius: 10px;
     background-color: white;
+    position: relative;
     color: black;
     width: 200;
-    height: 200;
+    height: 285;
+    padding: 0px 10px;
     float: left;
-    margin-left: 10%;
     overflow: auto;
 }
 
@@ -96,16 +94,24 @@ body {
     float: left;
     margin-left: 15px;
     margin-top: 5px;
+    width: 635px;
+    height: 207px;
+    margin-bottom: 60px;
 }
-.buttons div {
+.buttons .buttDiv {
     margin-bottom: 2px;
     background: white;
-    width: 170px;
+    width: 180px;
     height: 30px;
     position: relative;
     border: 2px solid black;
     border-radius: 7px;
     padding: 3px 3px;
+}
+.buttons .desc {
+    position: absolute;
+    left: 220;
+    line-height: 42px;
 }
 .buttons label, .buttons input {
     position: absolute;
@@ -124,7 +130,7 @@ body {
     line-height: 30px;
 }
 .buttons label {
-    width: 170px;
+    width: 180px;
     height: 30px;
     cursor: pointer;
     z-index: 90;
@@ -162,7 +168,9 @@ body {
 	color:#ffffff;
 	font-family:Arial;
 	font-size:13px;
-	padding:6px 24px;
+    padding: 6px 4px;
+    width: 180px;
+    text-align: center;
 	text-decoration:none;
     text-shadow:0px 1px 0px #854629;
 }
