@@ -33,17 +33,17 @@ class isrc_generator:
                 now = datetime.datetime.now()
                 curYear = now.year % 100        #Retrieves two digit year format
 
-                #Checks for upper limit on ISRC code (99999)
-                if result['last_generated'] >= 99999:
-                    result['last_generated'] = -1
                 # Checks for year rollover, then increments code for how many are requested
-                elif result['last_gen_year'] < curYear:
+                if result['last_gen_year'] < curYear:
                     result['last_gen_year'] = curYear
                     result['last_generated'] = amount
-                else:
-                    # Update last_generated
+                #If available, increment last_generated
+                elif 0 <= result['last_generated'] < 99999:
                     result['last_generated'] = result['last_generated']+amount
-
+                #Must be beyond upper limit, or already negative
+                else:
+                    result['last_generated'] = -1
+                
                 # Stores values that have now been used
                 sql = "UPDATE isrc_numbers SET last_generated=%s where country_code=%s AND registrant_code=%s"
                 cursor.execute(sql,(result['last_generated'], self.country, self.org))
@@ -70,9 +70,9 @@ class isrc_generator:
                 codeDic['last_generated'] = codeDic['last_generated'] + 1
                 codeCollection.append(code)
         else:
-            code = 'ERROR: ISRC limit reached, contact Administrator'
+            code = 'ERROR: ISRC limit reached, contact administrator'
             codeCollection.append(code)
-            
+
         return codeCollection
 
 if __name__ == '__main__':
