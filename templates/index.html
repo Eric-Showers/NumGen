@@ -10,7 +10,7 @@
     <body>
 
         <div id="header">
-            <img src="{{url_for('static', filename='MEG_Logo_white.png')}}" height="60" width="70" style="float: left">
+            <img src="{{url_for('static', filename='MEG_Logo_white.png')}}" height="86" width="102" style="float: left">
             <div><h1>Membran - Barcode / ISRC Generator</h1></div>
         </div>
 
@@ -18,10 +18,10 @@
 
             <div class="buttonHead">
                 <h2>New Barcodes &amp; Catalogue Numbers</h2>
-                <p>Select a Product Type:</p>
             </div>
             
             <div class="buttons">
+                <p>Select a Product Type:</p>
                 <form>
                     <div>
                         <div class="desc">Product licensed to MPG / MRM. or Masters owned by Membran</div>                        
@@ -38,21 +38,14 @@
                         </div>
                     </div>
                     <div>
-                        <div class="desc">Products from other labels, distributed by Membran</div>
-                        <div class="buttDiv">
-                            <input type="radio" name="codeType" id="PROMO" value="PROMO">
-                            <label for="PROMO">PROMO</label>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="desc">Products for Promo purposes only. Not for sale.</div>
+                        <div class="desc">Digital Only Releases</div>
                         <div class="buttDiv">
                             <input type="radio" name="codeType" id="Digital" value="Digital">
                             <label for="Digital">Digital</label>
                         </div>
                     </div>
                     <div>
-                        <div class="desc">Digital Only Releases</div>
+                        <div class="desc">Products from other labels, distributed by Membran</div>
                         <div class="buttDiv">
                             <input type="radio" name="codeType" id="FremdLabel" value="FremdLabel">
                             <label for="FremdLabel">Label Products</label>
@@ -64,17 +57,21 @@
                 </div>
             </div>
 
-            <div class="BCreturnField">
-                <p>New Barcode:</p>
-                <div id="returnBarcode">
-                    <!-- Barcode num goes here -->
+            <div style="float: left;">
+                <p>Results:</p>
+                <div class="BCreturnField">
+                    <p>New Barcode:</p>
+                    <div id="returnBarcode">
+                        <!-- Barcode num goes here -->
+                    </div>
+                    <p>New Catalogue Number:</p>
+                    <div id="returnProdNum">
+                        <!-- Catalogue num goes here -->
+                    </div>
                 </div>
-                <p>New Catalogue Number:</p>
-                <div id="returnProdNum">
-                    <!-- Catalogue num goes here -->
-                </div>
+    
             </div>
-
+            
         </div>
 
         <script>
@@ -83,14 +80,11 @@
                 var xhttp = new XMLHttpRequest();
                 var codeDict = {};
                 xhttp.onreadystatechange = function() {
-                    var codeDict = JSON.parse(this.responseText);
-                    console.log(this.responseText);
-                    console.log(codeDict);
-                    for (x in codeDict){
-                        console.log(codeDict[x]);
+                    if (this.readyState == 4 && this.status == 200) {
+                        var codeDict = JSON.parse(this.responseText);
+                        document.getElementById("returnBarcode").innerHTML = codeDict.code;
+                        document.getElementById("returnProdNum").innerHTML = codeDict.strProdNum;
                     }
-                    document.getElementById("returnBarcode").innerHTML = codeDict.code;
-                    document.getElementById("returnProdNum").innerHTML = codeDict.strProdNum;
                 };
                 
                 xhttp.open("POST", "{{url_for('createBarcode')}}", true);
@@ -108,7 +102,7 @@
             <div>
                 <div class="isrcForm">
                     <p>How many ISRCs do you need?</p>
-                    <p>(max 100)</p>
+                    <p id="max">(max 100)</p>
                     <div style="margin-top:20px;">                 
                         <div><input id="amount"></div>
                         <div><a class="genButton" onclick="getISRC()" style="width:163px;">Generate ISRC</a></div>
@@ -133,17 +127,22 @@
                     var isrcString = "";
                     var isrcList = [];
                     xhttp.onreadystatechange = function() {
-                        var isrcList = JSON.parse(this.responseText);
 
-                        for (x in isrcList) {
-                            isrcString += isrcList[x] + "<br>";
+                        if (this.readyState == 4 && this.status == 200) {
+                            var isrcList = JSON.parse(this.responseText);
+
+                            for (x in isrcList) {
+                                isrcString += isrcList[x] + "<br>";
+                            }
+                            document.getElementById("returnISRC").innerHTML = isrcString;
                         }
-                        document.getElementById("returnISRC").innerHTML = isrcString;
                     };
                     
                     xhttp.open("POST", "{{url_for('createISRC')}}", true);
                     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhttp.send("amount="+amount);
+                } else {
+                    document.getElementById("max").style.color = "red";
                 }
             }
         </script>

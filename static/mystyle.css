@@ -8,6 +8,7 @@ body {
     color: white;
     width: 100%;
     height: 50;
+    font-family: Montserrat-Bold;
 }
 #header div {
     margin-left: 130px;
@@ -93,7 +94,6 @@ body {
 .buttons {
     float: left;
     margin-left: 15px;
-    margin-top: 5px;
     width: 635px;
     height: 207px;
     margin-bottom: 60px;
@@ -190,16 +190,17 @@ body {
 }
 
 /* Font controls */
-h1 {
-	font-family: "Helvetica Neue";
-	font-size: 30px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 40px;
+@font-face {
+    font-family: montserrat-bold;
+    src: url(montserrat-bold.otf);
+    font-weight: bold;
+}
+@font-face {
+    font-family: helveticaneue;
+    src: url(helveticaneue.otf);
 }
 h2 {
-    font-family: "Helvetica Neue";
+    font-family: helveticaneue;
     font-size: 25px;
     font-style: normal;
     font-variant: normal;
@@ -207,7 +208,7 @@ h2 {
     line-height: 26px;
 }
 h3 {
-	font-family: "Helvetica Neue";
+	font-family: helveticaneue;
 	font-size: 20px;
 	font-style: normal;
 	font-variant: normal;
@@ -215,7 +216,7 @@ h3 {
 	line-height: 21px;
 }
 p {
-	font-family: "Helvetica Neue";
+	font-family: helveticaneue;
 	font-size: 16px;
 	font-style: normal;
 	font-variant: normal;
@@ -223,7 +224,7 @@ p {
 	line-height: 18px;
 }
 label {
-	font-family: "Helvetica Neue";
+	font-family: helveticaneue;
 	font-size: 16px;
 	font-style: normal;
 	font-variant: normal;
@@ -231,7 +232,7 @@ label {
 	line-height: 20px;
 }
 blockquote {
-	font-family: "Helvetica Neue";
+	font-family: helveticaneue;
 	font-size: 21px;
 	font-style: normal;
 	font-variant: normal;
@@ -239,7 +240,7 @@ blockquote {
 	line-height: 30px;
 }
 pre {
-	font-family: "Helvetica Neue";
+	font-family: helveticaneue;
 	font-size: 13px;
 	font-style: normal;
 	font-variant: normal;
