@@ -24,7 +24,6 @@ INSERT INTO `product_numbers` (`id`, `name`, `last_generated`, `is_default`, `ba
 (1, '233...', 234477, NULL, 'upca', 885150),
 (2, '600...', 600449, NULL, 'ean13', 405379),
 (3, 'Digital', 285232, NULL, 'upca', 885150),
-(4, 'PROMO', 17, NULL, 'code39', NULL),
 (5, 'Fremdlabel', 270009, NULL, 'upca', 885150);
 
 
