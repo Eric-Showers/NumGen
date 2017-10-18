@@ -33,8 +33,11 @@ class isrc_generator:
                 now = datetime.datetime.now()
                 curYear = now.year % 100        #Retrieves two digit year format
 
+                #Checks for upper limit on ISRC code (99999)
+                if result['last_generated'] >= 99999:
+                    result['last_generated'] = -1
                 # Checks for year rollover, then increments code for how many are requested
-                if result['last_gen_year'] < curYear:
+                elif result['last_gen_year'] < curYear:
                     result['last_gen_year'] = curYear
                     result['last_generated'] = amount
                 else:
@@ -59,12 +62,17 @@ class isrc_generator:
         #Builds the code by concatenating country, org, year, and product codes
         code = ''
         codeCollection = []
-        codeDic['last_generated'] = codeDic['last_generated'] - amount + 1
-        for x in range(0, amount):
-            code = self.country + self.org + str(codeDic['last_gen_year']) + str(codeDic['last_generated']).zfill(5)
-            codeDic['last_generated'] = codeDic['last_generated'] + 1
+        
+        if codeDic['last_generated'] >= 0:
+            codeDic['last_generated'] = codeDic['last_generated'] - amount + 1
+            for x in range(0, amount):
+                code = self.country + self.org + str(codeDic['last_gen_year']) + str(codeDic['last_generated']).zfill(5)
+                codeDic['last_generated'] = codeDic['last_generated'] + 1
+                codeCollection.append(code)
+        else:
+            code = 'ERROR: ISRC limit reached, contact Administrator'
             codeCollection.append(code)
-
+            
         return codeCollection
 
 if __name__ == '__main__':
