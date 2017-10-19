@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `product_numbers` (
   `is_default` tinyint(1) DEFAULT NULL,
   `barcode_type` varchar(30) DEFAULT NULL,
   `first_digits` int(11) DEFAULT NULL,
+  `upper_limit` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
@@ -20,12 +21,11 @@ CREATE TABLE IF NOT EXISTS `product_numbers` (
 -- values for each product type matches the real world availability
 
 
-INSERT INTO `product_numbers` (`id`, `name`, `last_generated`, `is_default`, `barcode_type`, `first_digits`) VALUES
-(1, '233...', 234477, NULL, 'upca', 885150),
-(2, '600...', 600449, NULL, 'ean13', 405379),
-(3, 'Digital', 285232, NULL, 'upca', 885150),
-(5, 'Fremdlabel', 270009, NULL, 'upca', 885150);
-
+INSERT INTO `product_numbers` (`id`, `name`, `last_generated`, `is_default`, `barcode_type`, `first_digits`, `upper_limit`) VALUES
+(1, '233...', 234000, NULL, 'upca', 885150, 239999),
+(2, '600...', 600000, NULL, 'ean13', 405379, 699999),
+(3, 'Fremdlabel', 270000, NULL, 'upca', 885150, 279999),
+(4, 'Digital', 280000, NULL, 'upca', 885150, 289999);
 
 --
 -- Table structure for table `isrc_numbers`
@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `isrc_numbers` (
   `registrant_code` varchar(3) NOT NULL DEFAULT '',
   `last_generated` int(11) DEFAULT NULL,
   `last_gen_year` int(11) DEFAULT NULL,
+  `upper_limit` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -46,5 +47,5 @@ CREATE TABLE IF NOT EXISTS `isrc_numbers` (
 -- value matches the real world availability
 
 
-INSERT INTO `isrc_numbers` (`id`, `name`, `registrant_code`, `country_code`, `last_generated`, `last_gen_year`) VALUES
-(1, 'Membran', 'U24', 'DE', 0, 17);
+INSERT INTO `isrc_numbers` (`id`, `name`, `registrant_code`, `country_code`, `last_generated`, `last_gen_year`, `upper_limit`) VALUES
+(1, 'Membran', 'U24', 'DE', 99995, 17, 99999);

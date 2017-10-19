@@ -31,6 +31,7 @@ class Barcode_generator:
                 newProd['lastGen'] = result['last_generated']
                 newProd['type'] = result['barcode_type']
                 newProd['firstDig'] = result['first_digits']
+                newProd['limit'] = result['upper_limit']
 
                 if self.checkLimit(newProd) and newProd['lastGen'] != -1:
                     newProd['prodNum'] = result['last_generated']+1
@@ -48,24 +49,27 @@ class Barcode_generator:
 
     def checkLimit(self, newProd):
         if newProd['prodType'] == '233...':
-            if 234000 <= newProd['lastGen'] < 239999:
+            if newProd['lastGen'] < newProd['limit']:
                 return True
             else:
                 return False
         elif newProd['prodType'] == '600...':
-            if 600000 <= newProd['lastGen'] < 699999:
+            if newProd['lastGen'] < newProd['limit']:
                 return True
             else:
                 return False
         elif newProd['prodType'] == 'Digital':
-            return True
-        elif newProd['prodType'] == 'Fremdlabel':
-            if 270000 <= newProd['lastGen'] <= 279999:
+            if newProd['lastGen'] < newProd['limit']:
+                return True
+            else:
+                return False
+        elif newProd['prodType'] == 'FremdLabel':
+            if newProd['lastGen'] < newProd['limit']:
                 return True
             else:
                 return False
         else:
-            return -1
+            return False
 
     #Given a type, find an available ProdNum and call generator methods and return code
     def getBarcodeNum(self, prodNumName):
