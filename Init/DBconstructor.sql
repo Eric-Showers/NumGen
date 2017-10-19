@@ -48,4 +48,4 @@ CREATE TABLE IF NOT EXISTS `isrc_numbers` (
 
 
 INSERT INTO `isrc_numbers` (`id`, `name`, `registrant_code`, `country_code`, `last_generated`, `last_gen_year`, `upper_limit`) VALUES
-(1, 'Membran', 'U24', 'DE', 99995, 17, 99999);
+(1, 'Membran', 'U24', 'DE', 0, 17, 99999);
