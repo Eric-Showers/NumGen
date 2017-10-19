@@ -48,26 +48,8 @@ class Barcode_generator:
         return newProd
 
     def checkLimit(self, newProd):
-        if newProd['prodType'] == '233...':
-            if newProd['lastGen'] < newProd['limit']:
-                return True
-            else:
-                return False
-        elif newProd['prodType'] == '600...':
-            if newProd['lastGen'] < newProd['limit']:
-                return True
-            else:
-                return False
-        elif newProd['prodType'] == 'Digital':
-            if newProd['lastGen'] < newProd['limit']:
-                return True
-            else:
-                return False
-        elif newProd['prodType'] == 'FremdLabel':
-            if newProd['lastGen'] < newProd['limit']:
-                return True
-            else:
-                return False
+        if newProd['lastGen'] < newProd['limit']:
+            return True
         else:
             return False
 
