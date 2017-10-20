@@ -19,7 +19,7 @@ To setup this utility:
 
 Users will interact with the number generators by navigatiing to the hosted addres in a web browser. From there, a user may select the type/amount of code they want and press the red generate button to recieve their code. Once the activation button is clicked, an API call will be made to app.py which will pass the parameters to the relevant generator class. The generator will then create codes and return them to the page from which the user may copy the code to their clipboard for usage.
 
-##Generator Implementation
+## Generator Implementation
 
 ### Barcode Generator
 
