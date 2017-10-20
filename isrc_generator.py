@@ -12,9 +12,6 @@ class isrc_generator:
     with open('Init/config.json') as data_file:
         config_data = json.load(data_file)
 
-    country = config_data['isrc']['country_code']
-    org = config_data['isrc']['registrant_code']
-
     def get_next_num(self, amount):
         connection = pymysql.connect(host=self.config_data['Mysql']['host'],
                                      user=self.config_data['Mysql']['user'],
@@ -26,8 +23,8 @@ class isrc_generator:
         try:
             with connection.cursor() as cursor:
                 # Reads the last assinged code
-                sql = "SELECT * FROM isrc_numbers WHERE country_code=%s AND registrant_code=%s"
-                cursor.execute(sql,(self.country, self.org))
+                sql = "SELECT * FROM isrc_numbers WHERE name=%s"
+                cursor.execute(sql, ("Membran"))
                 result = cursor.fetchone()
 
                 now = datetime.datetime.now()
@@ -45,8 +42,8 @@ class isrc_generator:
                 #Otherwise must be beyond upper limit, do no change last_generated
 
                 # Stores values that have now been used
-                sql = "UPDATE isrc_numbers SET last_generated=%s where country_code=%s AND registrant_code=%s"
-                cursor.execute(sql, (result['last_generated'], self.country, self.org))
+                sql = "UPDATE isrc_numbers SET last_generated=%s where name=%s"
+                cursor.execute(sql, (result['last_generated'], "Membran"))
 
             connection.commit()
         finally:

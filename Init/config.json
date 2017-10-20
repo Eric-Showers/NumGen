@@ -1,8 +1,4 @@
 {
-    "isrc": {
-        "country_code": "DE",
-        "registrant_code": "U24"
-    },
     "Mysql": {
         "host": "localhost",
         "user": "root",
