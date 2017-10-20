@@ -33,10 +33,12 @@ class Barcode_generator:
                 newProd['firstDig'] = result['first_digits']
                 newProd['limit'] = result['upper_limit']
 
-                if self.checkLimit(newProd) and newProd['lastGen'] != -1:
+                #Check for room for new code, if room then increment last_generated
+                if newProd['lastGen'] < newProd['limit']:
                     newProd['prodNum'] = result['last_generated']+1
+                #Otherwise no room so last_generated remains the same
                 else:
-                    newProd['prodNum'] = -1
+                    newProd['prodNum'] = result['last_generated']
 
                 sql = "UPDATE product_numbers SET last_generated=%s where name=%s"
                 cursor.execute(sql, (newProd['prodNum'], name))
@@ -47,18 +49,13 @@ class Barcode_generator:
 
         return newProd
 
-    def checkLimit(self, newProd):
-        if newProd['lastGen'] < newProd['limit']:
-            return True
-        else:
-            return False
-
     #Given a type, find an available ProdNum and call generator methods and return code
     def getBarcodeNum(self, prodNumName):
 
         newProd = self.get_prod_num(prodNumName)
-        
-        if newProd['prodNum'] != -1:
+
+        #Check that there was room for new product, otherwise skip gen. process
+        if newProd['lastGen'] < newProd['limit']:
             newProd['strProdNum'] = str(newProd['prodNum'])
             if newProd['type'] == 'upca':
                 newProd['code'] = str(newProd['firstDig']) + str(newProd['prodNum']%100000)
@@ -84,42 +81,5 @@ class Barcode_generator:
 
 if __name__ == '__main__':
     temp = Barcode_generator()
-
-    # Test for checkLimit function
-    testProd = {'prodType':'233...', 'lastGen':234001}
-    if temp.checkLimit(testProd) and temp.checkLimit(testProd) != -1:
-        print("Passed #1")
-    else:
-        print("Failed #1")
-    testProd['lastGen'] = 240000
-    if not temp.checkLimit(testProd) and temp.checkLimit(testProd) != -1:
-        print("Passed #2")
-    else:
-        print("Failed #2")
-
-    testProd['prodType'] = "600..."
-    testProd['lastGen'] = 600001
-
-    if temp.checkLimit(testProd) and temp.checkLimit(testProd) != -1:
-        print("Passed #3")
-    else:
-        print("Failed #3")
-    testProd['lastGen'] = 700000
-    if not temp.checkLimit(testProd) and temp.checkLimit(testProd) != -1:
-        print("Passed #4")
-    else:
-        print("Failed #4")
-
-    testProd['prodType'] = "Fremdlabel"
-    testProd['lastGen'] = 270001
-
-    if temp.checkLimit(testProd) and temp.checkLimit(testProd) != -1:
-        print("Passed #5")
-    else:
-        print("Failed #5")
-    testProd['lastGen'] = 280000
-    if not temp.checkLimit(testProd) and temp.checkLimit(testProd) != -1:
-        print("Passed #6")
-    else:
-        print("Failed #6")
-    # End checkLimit test
+    print(temp.getBarcodeNum('233...')['code'])
+    print(temp.getBarcodeNum('600...')['code'])
