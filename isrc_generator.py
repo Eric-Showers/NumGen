@@ -39,10 +39,10 @@ class isrc_generator:
                     result['last_gen_year'] = curYear
                     result['last_generated'] = amount
 
-                #If available, increment last_generated
+                #If newNum at or below upper limit, increment last_generated
                 elif 0 <= result['newNum'] <= result['upper_limit']:
                     result['last_generated'] = result['last_generated']+amount
-                #Must be beyond upper limit, or already negative
+                #Otherwise must be beyond upper limit, do no change last_generated
 
                 # Stores values that have now been used
                 sql = "UPDATE isrc_numbers SET last_generated=%s where country_code=%s AND registrant_code=%s"
@@ -66,7 +66,7 @@ class isrc_generator:
         if 0 <= codeDic['newNum'] <= codeDic['upper_limit']:
             codeDic['last_generated'] = codeDic['last_generated'] - amount + 1
             for x in range(0, amount):
-                code = self.country + self.org + str(codeDic['last_gen_year']) + str(codeDic['last_generated']).zfill(5)
+                code = codeDic['country_code'] + codeDic['registrant_code'] + str(codeDic['last_gen_year']) + str(codeDic['last_generated']).zfill(5)
                 codeDic['last_generated'] = codeDic['last_generated'] + 1
                 codeCollection.append(code)
         else:
