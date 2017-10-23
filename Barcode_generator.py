@@ -1,5 +1,4 @@
 import json
-import barcode  #viivakoodi
 from barcode import generate
 import pymysql.cursors
 
@@ -7,7 +6,6 @@ class Barcode_generator:
 
     with open('Init/config.json') as data_file:
         config_data = json.load(data_file)
-
 
     def get_prod_num(self, name):
 
@@ -49,13 +47,14 @@ class Barcode_generator:
 
         return newProd
 
-    #Given a type, find an available ProdNum and call generator methods and return code
+    # Given a type, find an available ProdNum and call generator methods and return code
     def getBarcodeNum(self, prodNumName):
 
         newProd = self.get_prod_num(prodNumName)
 
-        #Check that there was room for new product, otherwise skip gen. process
+        # Check that there was room for new product, otherwise skip gen. process
         if newProd['lastGen'] < newProd['limit']:
+            # Create barcode without check digit
             newProd['strProdNum'] = str(newProd['prodNum'])
             if newProd['type'] == 'upca':
                 newProd['code'] = str(newProd['firstDig']) + str(newProd['prodNum']%100000)
@@ -63,23 +62,37 @@ class Barcode_generator:
                 newProd['code'] = str(newProd['firstDig']) + str(newProd['prodNum'])
             else:
                 newProd['code'] = str(newProd['prodNum'])
-
-            codeObj = barcode.get(newProd['type'], str(newProd['code']))
-            newProd['code'] = codeObj.get_fullcode()
+            # Get check digit
+            newProd['code'] = newProd['code'] + str(self.createCheckNum(newProd))
         else:
             newProd['code'] = "ERROR: product limit reached"
             newProd['strProdNum'] = "Contact administrator"
         return newProd
 
-    #Given a type, generate the number and image for a barcode
-    def getBarcodeImg(self, prodNumName):
+    def createCheckNum(self, newProd):
+        codeStr = newProd['code']
 
-        newProd = self.getBarcodeNum(prodNumName)
-        generate('%s'%(newProd['type']), u'%s'%(newProd['code']), output='%s_'%(newProd['type'])+'%s'%(newProd['code']))
+        if newProd['type'] == 'upca':
+            checkSum = 3*(int(codeStr[0])+int(codeStr[2])+int(codeStr[4])+int(codeStr[6])+int(codeStr[8])+int(codeStr[10]))+int(codeStr[1])+int(codeStr[3])+int(codeStr[5])+int(codeStr[7])+int(codeStr[9])
+            check2 = checkSum%10
+            if check2 != 0:
+                check2 = 10 - check2
+            return check2
 
-        return 0
+        elif newProd['type'] == 'ean13':
+            checkSum = int(codeStr[0])+int(codeStr[2])+int(codeStr[4])+int(codeStr[6])+int(codeStr[8])+int(codeStr[10]) + 3*(int(codeStr[1])+int(codeStr[3])+int(codeStr[5])+int(codeStr[7])+int(codeStr[9])+int(codeStr[11]))
+            check2 = checkSum%10
+            if check2 != 0:
+                check2 = 10 - check2
+            return check2
 
 if __name__ == '__main__':
     temp = Barcode_generator()
-    print(temp.getBarcodeNum('233...')['code'])
-    print(temp.getBarcodeNum('600...')['code'])
+
+    prodOne = temp.getBarcodeNum('233...')
+    print(prodOne['code'])
+    print(prodOne['strProdNum'])
+
+    prodTwo = temp.getBarcodeNum('600...')
+    print(prodTwo['code'])
+    print(prodTwo['strProdNum'])
