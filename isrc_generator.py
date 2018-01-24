@@ -42,8 +42,8 @@ class isrc_generator:
                 #Otherwise must be beyond upper limit, do no change last_generated
 
                 # Stores values that have now been used
-                sql = "UPDATE isrc_numbers SET last_generated=%s where name=%s"
-                cursor.execute(sql, (result['last_generated'], "Membran"))
+                sql = "UPDATE isrc_numbers SET last_generated=%s AND last_gen_year=%s where name=%s"
+                cursor.execute(sql, (result['last_generated'], result['last_gen_year'], "Membran"))
 
             connection.commit()
         finally:
